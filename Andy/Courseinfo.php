@@ -105,70 +105,141 @@
 			</nav>
 		</div>
 
-	<header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_4.jpg)" data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-			<div class="gtco-container" padding-top = 0px>
+		<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(images/img_bg_4.jpg)" data-stellar-background-ratio="0.5">
+			<div class="overlay"></div>
+			<div class="gtco-container">
 				<div class="row row-mt-15em">
-					<div class="col-md-12 mt-text text-center animate-box" data-animate-effect="fadeInUp">
+					<div class="col-md-7 mt-text text-left animate-box" data-animate-effect="fadeInUp">
 						<h1><strong>Course Information</strong></h1>
-						<!-- <div class = "padding-low"></div> -->
-						<!-- <h2>Here's the list of courses available. Basic information </h2> -->
-						<div class = "padding-low"></div>
 						<h2><strong>Cannot find your course below?</strong></h2>
+						<div class = "padding-low"></div>
 						<input type="button" onclick="location.href='CreateCourse.php';" value="I want to create Course" ><br>
-						 <div class = "padding-medium"></div>
+						 <div class = "padding-low"></div>
 
-						<div >
-						<?php
-							$result = mysqli_query($db,"SELECT course_title,course_code,enrolled_num, max_enrolled_num FROM `course_list`") or die("failed");
-							echo "<table align=center border=\"1\"><tr><td bgcolor=\"beige\"></td>";
-							for ($i = 0; $i < mysqli_num_fields($result); $i++)
-							{
-								$finfo = mysqli_fetch_field_direct($result, $i);
-								echo "<td bgcolor=\"beige\">".$finfo->name."</td>";
-							}
-							echo "</tr>";
-							for ($i = 0; $i < mysqli_num_rows($result); $i++)  {
-								echo "<tr>";
-								$row_array = mysqli_fetch_row($result);
-								echo "<td bgcolor=\"beige\">
-								<form method = \"POST\"><button name = \"delete\" value = \"".$row_array[1]."\" type=\"submit\">Delete course</button></form>
-								<form method = \"POST\" action = \"EnrolledList.php\"><button name = \"View\" value = \"".$row_array[1]."\" type=\"submit\">View enrolled list</button></form></td>";
-								for ($j=0; $j < mysqli_num_fields($result); $j++)
-								{
-									echo "<td bgcolor=\"beige\">".$row_array[$j]."</td>\n";
-								}
-								echo "</tr>";
-							}
-						?>
 
-						<?php
-						if (isset($_POST['delete']))
-						{
-							$sql = "DROP TABLE ".$_POST['delete']."_info;";
-							mysqli_query($db,$sql) or die("Delete enrolled info failed");
-							$sql = "DROP TABLE ".$_POST['delete']."_material;";
-							mysqli_query($db,$sql) or die("Delete material table failed");
-							$sql = "DELETE FROM `course_list` WHERE `course_code` = '".$_POST['delete']."';";
-							mysqli_query($db,$sql) or die("Delete failed");
-							//Also need to update the user enrolled info
+				</div>
+			</div>
+		</header>
 
-							//Also need to update the user enrolled info
-							$message = "Delete Successfully";
-							echo "<script type='text/javascript'>alert('$message');</script>";
-							header("Refresh:0");
-						}
-						?>
-					</div>
+	<div class="flex-section" style="background-color:grey;">
+	<div class="col-1">
+		<?php
+			$result = mysqli_query($db,"SELECT course_title,course_code,enrolled_num, max_enrolled_num FROM `course_list`") or die("failed");
+			echo "<table align=center border=\"1\"><tr><td bgcolor=\"beige\"></td>";
+			for ($i = 0; $i < mysqli_num_fields($result); $i++)
+			{
+				$finfo = mysqli_fetch_field_direct($result, $i);
+				echo "<td bgcolor=\"beige\">".$finfo->name."</td>";
+			}
+			echo "</tr>";
+			for ($i = 0; $i < mysqli_num_rows($result); $i++)  {
+				echo "<tr>";
+				$row_array = mysqli_fetch_row($result);
+				echo "<td bgcolor=\"beige\">
+				<form method = \"POST\"><button name = \"delete\" value = \"".$row_array[1]."\" type=\"submit\">Delete course</button></form>
+				<form method = \"POST\" action = \"EnrolledList.php\"><button name = \"View\" value = \"".$row_array[1]."\" type=\"submit\">View enrolled list</button></form></td>";
+				for ($j=0; $j < mysqli_num_fields($result); $j++)
+				{
+					echo "<td bgcolor=\"beige\">".$row_array[$j]."</td>\n";
+				}
+				echo "</tr>";
+			}
+		?>
+
+		<?php
+		if (isset($_POST['delete']))
+		{
+			$sql = "DROP TABLE ".$_POST['delete']."_info;";
+			mysqli_query($db,$sql) or die("Delete enrolled info failed");
+			$sql = "DROP TABLE ".$_POST['delete']."_material;";
+			mysqli_query($db,$sql) or die("Delete material table failed");
+			$sql = "DELETE FROM `course_list` WHERE `course_code` = '".$_POST['delete']."';";
+			mysqli_query($db,$sql) or die("Delete failed");
+			//Also need to update the user enrolled info
+
+			//Also need to update the user enrolled info
+			$message = "Delete Successfully";
+			echo "<script type='text/javascript'>alert('$message');</script>";
+			header("Refresh:0");
+		}
+		?>
+	</div>
+	</div>
+
+	<!-- <div class="gtco-cover gtco-cover-sm" style="background-image: url(images/img_bg_3.jpg)" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="gtco-container text-center">
+			<div class="display-t">
+				<div class="display-tc">
+					<h1 class="animate-box">Quality Over Quantity</h1>
 				</div>
 			</div>
 		</div>
-	</header>
+	</div>
+
+	<footer id="gtco-footer" role="contentinfo">
+		<div class="gtco-container">
+			<div class="row row-p	b-md">
+
+				<div class="col-md-4">
+					<div class="gtco-widget">
+						<h3>About Us</h3>
+						<p>We are students from the Chinese University of Hong Kong. We hope this website can provide a better learning environment to both the students and instructors.</p>
+					</div>
+				</div>
+
+				<div class="col-md-4 col-md-push-1">
+					<div class="gtco-widget">
+						<h3>Services</h3>
+						<ul class="gtco-footer-links">
+							<li>Public Course Outlines</li>
+							<li>Discussion Site</li>
+							<li>Course Evaluation</li>
+							<li>Personal Calendar</li>
+							<li>Posting course material</li>
+						</ul>
+					</div>
+				</div>
+
+
+
+				<div class="col-md-3 col-md-push-1">
+					<div class="gtco-widget">
+						<h3>Get In Touch</h3>
+						<ul class="gtco-quick-contact">
+							<li><a href="#"><i class="icon-phone"></i> +1 234 567 890</a></li>
+							<li><a href="#"><i class="icon-mail2"></i> info@GetTemplates.co</a></li>
+							<li><a href="#"><i class="icon-chat"></i> Live Chat</a></li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row copyright">
+				<div class="col-md-12">
+					<p class="pull-left">
+						<small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small>
+						<small class="block">Designed by <a href="http://GetTemplates.co/" target="_blank">GetTemplates.co</a> Demo Images: <a href="http://unsplash.com/" target="_blank">Unsplash</a></small>
+					</p>
+					<p class="pull-right">
+						<ul class="gtco-social-icons pull-right">
+							<li><a href="#"><i class="icon-twitter"></i></a></li>
+							<li><a href="#"><i class="icon-facebook"></i></a></li>
+							<li><a href="#"><i class="icon-linkedin"></i></a></li>
+							<li><a href="#"><i class="icon-dribbble"></i></a></li>
+						</ul>
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</footer> -->
 
 	</div>
 	</div>
 
-	<div class="gototop js-top">
+	<div class="gototop js-top active">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
 

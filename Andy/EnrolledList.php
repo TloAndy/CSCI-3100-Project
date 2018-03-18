@@ -107,16 +107,16 @@
 			<div class="row row-mt-15em">
 				<div class="col-md-7 mt-text text-left animate-box" data-animate-effect="fadeInUp">
 					<h1><strong>Enrolled List</strong></h1>
-					<!-- <h2>Give you a clear expectation of different course and enhance both teaching and learning efficiency.</h2> -->
+					<h2></h2>
+					<div class="padding-medium"></div>
+					<input type="button" onclick="location.href='Courseinfo.php';" value="Back to course list" ><br>
 				</div>
 			</div>
 		</div>
 	</header>
 
-	<div class="flex-section gtco-gray-bg">
+	<div class="flex-section" style="background-color:grey;>
 		<div class="col-1">
-			<div class="text">
-					<input type="button" onclick="location.href='Courseinfo.php';" value="Back" ><br>
 					<?php
 					if (isset($_POST['View']))
 					{
@@ -125,7 +125,7 @@
 						for ($i = 0; $i < mysqli_num_fields($result); $i++)
 						{
 							$finfo = mysqli_fetch_field_direct($result, $i);
-							echo "<td>".$finfo->name."</td>";
+							echo "<td bgcolor=\"white\">".$finfo->name."</td>";
 						}
 						echo "</tr>";
 						for ($i = 0; $i < mysqli_num_rows($result); $i++)  {
@@ -133,16 +133,16 @@
 							$row_array = mysqli_fetch_row($result);
 							for ($j=0; $j < mysqli_num_fields($result); $j++)
 							{
-								echo "<td>".$row_array[$j]."</td>\n";
+								echo "<td bgcolor=\"white\">".$row_array[$j]."</td>\n";
 							}
 							echo "</tr>";
 						}
 					}
 					?>
-			</div>
 		</div>
-		<!-- <div class="col-2 flex-img" style="background-image: url(images/img_1.jpg);"></div> -->
 	</div>
+
+
 </div>
 
 </div>
