@@ -1,0 +1,10 @@
+CREATE TABLE `account_info` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `account_id` text NOT NULL,
+ `username` text NOT NULL,
+ `user_pw` text NOT NULL,
+ `google_id` text NOT NULL,
+ `verified` tinyint(1) NOT NULL,
+ PRIMARY KEY (`id`),
+ KEY `verified` (`verified`)
+) ENGINE=InnoDB AUTO_INCREMENT=1280 DEFAULT CHARSET=latin1
